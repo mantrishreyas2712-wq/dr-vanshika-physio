@@ -679,6 +679,13 @@ section {
 }
 
 .booking-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+    align-items: start;
+}
+
+.features-list {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
@@ -700,6 +707,7 @@ section {
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    flex-shrink: 0;
 }
 
 /* Form Styling */
@@ -757,23 +765,25 @@ section {
 
 /* Certifications Box */
 .certifications-box {
-    margin-top: var(--spacing-md);
-    padding-top: var(--spacing-sm);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+    padding-left: var(--spacing-sm);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: none;
+    padding-top: 0;
 }
 
 .certifications-box h3 {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     margin-bottom: var(--spacing-sm);
     color: var(--dark);
-    margin-top: 1rem;
+    margin-top: 0;
 }
 
 .cert-list {
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
 .cert-list li {
@@ -987,6 +997,24 @@ section {
     .hero-text h1 {
         font-size: 2.75rem;
         margin-bottom: var(--spacing-sm);
+    }
+
+    .booking-features {
+        grid-template-columns: 1fr;
+    }
+
+    .form-layout {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .form-sidebar {
+        order: -1;
+        /* Show certs above inputs on mobile */
+    }
+
+    .form-sidebar .certifications-box {
+        margin-bottom: var(--spacing-md);
     }
 
     .hero-text .subtitle {
