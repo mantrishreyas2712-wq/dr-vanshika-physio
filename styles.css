@@ -755,6 +755,45 @@ section {
     display: none;
 }
 
+/* Certifications Box */
+.certifications-box {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.certifications-box h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--dark);
+    margin-top: 1rem;
+}
+
+.cert-list {
+    list-style: none;
+}
+
+.cert-list li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 500;
+}
+
+.cert-badge {
+    background: var(--white);
+    color: var(--primary);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    min-width: 50px;
+    text-align: center;
+    border: 1px solid var(--primary-light);
+}
+
 .form-message.success {
     background: #d4edda;
     color: #155724;
