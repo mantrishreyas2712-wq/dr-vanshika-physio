@@ -1,18 +1,18 @@
 // Mobile menu toggle
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
-    
+
     if (mobileMenuToggle && navMenu) {
-        mobileMenuToggle.addEventListener('click', function() {
+        mobileMenuToggle.addEventListener('click', function () {
             navMenu.classList.toggle('active');
             this.classList.toggle('active');
         });
     }
-    
+
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
@@ -26,18 +26,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     // Set minimum date to today for date picker
     const dateInput = document.getElementById('date');
     if (dateInput) {
         const today = new Date().toISOString().split('T')[0];
         dateInput.setAttribute('min', today);
     }
-    
+
     // Form submission handler (for Formspree)
     const bookingForm = document.querySelector('.booking-form');
     if (bookingForm) {
-        bookingForm.addEventListener('submit', function(e) {
+        bookingForm.addEventListener('submit', function (e) {
             const submitBtn = this.querySelector('button[type="submit"]');
             if (submitBtn) {
                 submitBtn.disabled = true;
@@ -45,11 +45,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
     if (navbar) {
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             if (window.scrollY > 50) {
                 navbar.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.12)';
             } else {
@@ -57,14 +57,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Intersection Observer for animations
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-    
-    const observer = new IntersectionObserver(function(entries) {
+
+    const observer = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate-in');
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, observerOptions);
-    
+
     // Observe cards for animation
     document.querySelectorAll('.about-card, .service-card, .clinic-card, .contact-card').forEach(card => {
         card.style.opacity = '0';
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(card);
     });
-    
+
     // Add animation class styles
     const style = document.createElement('style');
     style.textContent = `
@@ -114,4 +114,39 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     `;
     document.head.appendChild(style);
+    // Handle "Book Now" buttons from services
+    document.querySelectorAll('.btn-book-service').forEach(button => {
+        button.addEventListener('click', function () {
+            const serviceName = this.dataset.service;
+            const bookingSection = document.getElementById('book');
+            const serviceSelect = document.getElementById('service');
+            const dateInput = document.getElementById('date');
+
+            // Scroll to booking section
+            if (bookingSection) {
+                bookingSection.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // Select the service
+            if (serviceSelect) {
+                serviceSelect.value = serviceName;
+            }
+
+            // Focus and open date picker (with a small delay to allow scroll to complete)
+            if (dateInput) {
+                setTimeout(() => {
+                    dateInput.focus();
+                    if (typeof dateInput.showPicker === 'function') {
+                        try {
+                            dateInput.showPicker();
+                        } catch (e) {
+                            console.log('showPicker not supported or blocked');
+                        }
+                    } else {
+                        dateInput.click();
+                    }
+                }, 800);
+            }
+        });
+    });
 });
