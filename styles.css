@@ -955,8 +955,11 @@ section {
     }
 
     .hero-image {
-        display: none;
-        /* Hide hero image on mobile to focus on CTA */
+        display: block;
+        margin-bottom: var(--spacing-md);
+        max-width: 250px;
+        /* Limit size on mobile */
+        margin-inline: auto;
     }
 
     .hero-title {
