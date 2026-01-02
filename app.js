@@ -34,15 +34,51 @@ document.addEventListener('DOMContentLoaded', function () {
         dateInput.setAttribute('min', today);
     }
 
-    // Form submission handler (for Formspree)
-    const bookingForm = document.querySelector('.booking-form');
+    // Form submission handler (Dynamic WhatsApp)
+    const bookingForm = document.getElementById('bookingForm');
     if (bookingForm) {
         bookingForm.addEventListener('submit', function (e) {
-            const submitBtn = this.querySelector('button[type="submit"]');
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<span>Sending...</span>';
+            e.preventDefault();
+
+            // Get values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const service = document.getElementById('service').value;
+            const notes = document.getElementById('notes').value;
+
+            // Validate required fields
+            if (!name || !phone || !date || !time || !service) {
+                alert('Please fill in all required fields');
+                return;
             }
+
+            // Format Date for better readability
+            const dateObj = new Date(date);
+            const formattedDate = dateObj.toLocaleDateString('en-GB', {
+                day: 'numeric', month: 'short', year: 'numeric'
+            });
+
+            // Construct Message
+            let message = `*APPOINTMENT REQUEST*\n\n`;
+            message += `Hi Dr. Vanshika, I would like to book an appointment.\n\n`;
+            message += `*Name:* ${name}\n`;
+            message += `*Service:* ${service}\n`;
+            message += `*Date:* ${formattedDate}\n`;
+            message += `*Time:* ${time}\n`;
+            message += `*Phone:* ${phone}\n`;
+            if (email) message += `*Email:* ${email}\n`;
+            if (notes) message += `*Notes:* ${notes}\n`;
+
+            // Encode message
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappNumber = '919876543210';
+
+            // Open WhatsApp
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
         });
     }
 

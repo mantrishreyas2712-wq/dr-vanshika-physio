@@ -159,6 +159,20 @@ h4 {
     box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
 }
 
+.btn-whatsapp-submit {
+    background: var(--gradient-whatsapp);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.btn-whatsapp-submit:hover {
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    transform: translateY(-2px);
+}
+
 .cta-note {
     margin-top: var(--spacing-sm);
     color: #666;
